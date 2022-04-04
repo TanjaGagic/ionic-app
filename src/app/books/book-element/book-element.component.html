@@ -1,0 +1,14 @@
+<ion-item>
+  <ion-avatar slot="start">
+    <img [src]="book.imageUrl" />
+  </ion-avatar>
+
+  <ion-label text-wrap>
+    <h3>{{book.name}}</h3>
+    {{book.rating}}/10
+  </ion-label>
+
+  <ion-icon slot="end" name="book"></ion-icon>
+  <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+
+</ion-item>

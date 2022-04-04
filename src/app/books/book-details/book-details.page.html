@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/books"></ion-back-button>
+    </ion-buttons>
+    <ion-title>book-details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="ion-padding ion-text-center">
+    <img [src]="book.imageUrl" offset="4" />
+    <ion-card-header>
+      <ion-card-title>{{book.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <text>Author: </text><br />
+      {{book.author}}
+    </ion-card-content>
+    <ion-card-content>
+      <text>Rating: </text>{{book.rating}}/10
+    </ion-card-content>
+    <ion-card-content>
+      <text>Comment: </text><br />
+      {{book.comment}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
