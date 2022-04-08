@@ -16,6 +16,8 @@ export class BooksPage implements OnInit {
   { id: 'k2', name: 'Jos neka knjiga', author: 'Covek2', rating: '7', comment: 'Neki kom', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnWLe2eWrJM8_jvA30lj2Cwo3HQu_a3gCAZg&usqp=CAU' }
   ];*/
 
+  books: Book[];
+  private bookSub: Subscription;
 
   constructor(private menuCtrl: MenuController, private booksService: BooksService, private modalCtrl: ModalController, private alertCtrl: AlertController) {
     console.log('constructor');
@@ -61,17 +63,22 @@ export class BooksPage implements OnInit {
       if (resultData.role === 'confirm') {
         console.log(resultData);
 
-        this.booksService.addBook(resultData.data.bookData.title, resultData.data.bookData.author, resultData.data.bookData.rating, resultData.data.bookData.comment);
+        this.booksService.addBook(resultData.data.bookData.title, resultData.data.bookData.author, resultData.data.bookData.rating, resultData.data.bookData.comment, resultData.data.bookData.imageUrl).subscribe((books) => {});
       }
     });
   }
 
   ngOnInit() {
     console.log('ngOnInit');
+    this.bookSub = this.booksService.books.subscribe((books) => {
+      this.books = books;
+    });
   }
 
   ngViewWillEnter() {
-    console.log('ionViewWillEnter');
+    this.booksService.getBooks().subscribe((books) => {
+      // this.quotes = quotes;
+    });
   }
 
   ngViewDidEnter() {

@@ -13,6 +13,7 @@ export class BooksModalComponent implements OnInit {
   @Input() author: string;
   @Input() rating: string;
   @Input() comment: string;
+  @Input() imageUrl: string;
 
   constructor(private modalCtrl: ModalController) { }
 
@@ -34,6 +35,7 @@ export class BooksModalComponent implements OnInit {
         author: this.form.value.author,
         rating: this.form.value.rating,
         comment: this.form.value.comment,
+        imageUrl: this.form.value.imageUrl,
       }
     }, 'confirm');
       }     

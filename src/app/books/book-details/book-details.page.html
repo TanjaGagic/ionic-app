@@ -4,16 +4,31 @@
       <ion-back-button defaultHref="/books"></ion-back-button>
     </ion-buttons>
     <ion-title>Book Details</ion-title>
-    <ion-buttons slot="end" (click)="openAlert($event)">
-      <ion-fab-button size="small" >
-      X
+    <ion-buttons slot="end">
+      <ion-fab-button size="small" color="tertiary" (click)="onEditBook()">
+        <ion-icon name="pencil"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button size="small" color="tertiary" (click)="onDeleteBook()">
+        <ion-icon name="trash"></ion-icon>
       </ion-fab-button>
     </ion-buttons>
+
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card class="ion-padding ion-text-center">
+
+  <div class="ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+<ion-content>
+  <div class="ion-text-center" *ngIf="isLoading">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <ion-card *ngIf="!isLoading" class="ion-padding ion-text-center">
     <img [src]="book.imageUrl" offset="4" />
     <ion-card-header>
       <ion-card-title>{{book.title}}</ion-card-title>
