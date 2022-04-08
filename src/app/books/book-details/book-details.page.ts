@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LoadingController, ModalController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { Book } from '../book.model';
 import { BooksService } from '../books.service';
 import {BooksModalComponent} from '../books-modal/books-modal.component';
@@ -16,7 +16,7 @@ export class BookDetailsPage implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private booksService: BooksService, private navCtrl: NavController,
-    private loadingCtrl: LoadingController, private modalCtrl: ModalController) { }
+    private loadingCtrl: LoadingController, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
 
     ngOnInit() {
       this.route.paramMap.subscribe(paramMap => {
@@ -86,5 +86,29 @@ export class BookDetailsPage implements OnInit {
           }
         });
     }
+
+    showConfirmAlert(event) {
+      event.stopPropagation();
+      this.alertCtrl.create({
+          header: 'Deleting book',
+          message: 'Are you sure you want to permanently delete this book?',
+          buttons: [
+              {
+                  text: 'No',
+                  handler: () => {
+                      console.log('Cancel clicked');
+                  }
+              },
+              {
+                  text: 'Yes',
+                  handler: () => {
+                    console.log('Deleted clicked');
+                  }
+              }
+          ]
+      })
+      .then((alert) => alert.present());
+    }
+  
 
 }

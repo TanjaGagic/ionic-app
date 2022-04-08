@@ -77,7 +77,7 @@ export class BooksPage implements OnInit {
 
   ngViewWillEnter() {
     this.booksService.getBooks().subscribe((books) => {
-      // this.quotes = quotes;
+     
     });
   }
 
@@ -94,7 +94,9 @@ export class BooksPage implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
+    if (this.bookSub) {
+      this.bookSub.unsubscribe();
+    }
+  }
   }
 
-}
