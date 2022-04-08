@@ -7,7 +7,7 @@ import { Book } from '../book.model';
   styleUrls: ['./book-element.component.scss'],
 })
 export class BookElementComponent implements OnInit {
-  @Input() book: Book = { id: 'q3', name: 'Neki', author: 'Covek', rating: '8', comment: 'Neki kom', imageUrl: '' };
+  @Input() book: Book = { id: 'q3', title: 'Neki', author: 'Covek', rating: '8', comment: 'Neki kom', imageUrl: '' };
 
   constructor() { }
 

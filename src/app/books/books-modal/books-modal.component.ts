@@ -10,6 +10,9 @@ import { ModalController } from '@ionic/angular';
 export class BooksModalComponent implements OnInit {
   @ViewChild('f', { static: true }) form: NgForm;
   @Input() title: string;
+  @Input() author: string;
+  @Input() rating: string;
+  @Input() comment: string;
 
   constructor(private modalCtrl: ModalController) { }
 
@@ -27,10 +30,10 @@ export class BooksModalComponent implements OnInit {
     this.modalCtrl.dismiss({
       bookData:
       {
-        name: this.form.value['name'],
-        author: this.form.value['author'],
-        rating: this.form.value['rating'],
-        comment: this.form.value['comment'],
+        name: this.form.value.name,
+        author: this.form.value.author,
+        rating: this.form.value.rating,
+        comment: this.form.value.comment,
       }
     }, 'confirm');
       }     
