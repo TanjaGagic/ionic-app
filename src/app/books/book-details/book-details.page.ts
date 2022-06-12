@@ -38,15 +38,34 @@ export class BookDetailsPage implements OnInit {
     }
 
 
-    onDeleteBook() {
-      this.loadingCtrl.create({message: 'Deleting...'}).then(loadingEl => {
-        loadingEl.present();
-        this.booksService.deleteBook(this.book.id).subscribe(() => {
-          loadingEl.dismiss();
-          this.navCtrl.navigateBack('/books');
-        });
-      });
-    }
+  onDeleteBook() {
+    this.alertCtrl.create({
+      header: 'Deleting book',
+      message: 'Are you sure you want to permanently delete this book?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.loadingCtrl.create({ message: 'Deleting...' }).then(loadingEl => {
+              loadingEl.present();
+              this.booksService.deleteBook(this.book.id).subscribe(() => {
+                loadingEl.dismiss();
+                this.navCtrl.navigateBack('/books');
+              });
+            });
+          }
+        }
+      ]
+    }).then((alert) => alert.present()
+    );
+  }
+
 
     onEditBook() {
       this.modalCtrl
@@ -87,28 +106,6 @@ export class BookDetailsPage implements OnInit {
         });
     }
 
-    showConfirmAlert(event) {
-      event.stopPropagation();
-      this.alertCtrl.create({
-          header: 'Deleting book',
-          message: 'Are you sure you want to permanently delete this book?',
-          buttons: [
-              {
-                  text: 'No',
-                  handler: () => {
-                      console.log('Cancel clicked');
-                  }
-              },
-              {
-                  text: 'Yes',
-                  handler: () => {
-                    console.log('Deleted clicked');
-                  }
-              }
-          ]
-      })
-      .then((alert) => alert.present());
-    }
-  
+
 
 }

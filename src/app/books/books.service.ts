@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Book } from './book.model';
-import {map, switchMap, take, tap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import { map, switchMap, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user.model';
+
 
 interface BookData {
   title: string;
@@ -19,7 +21,12 @@ interface BookData {
 })
 
 export class BooksService {
+
+  url = 'https://books.google.com/ebooks';
+  apiKey = 'AIzaSyA97cyT9LhWcathY8mXRAnYmCygOoG_OHU';
+
   private _books = new BehaviorSubject<Book[]>([]);
+
   
 
  constructor(private http: HttpClient, private authService: AuthService) { }
@@ -62,20 +69,21 @@ export class BooksService {
     );
   }
   
+
   getBooks() {
     return this.authService.token.pipe(
       take(1),
       switchMap((token) => {
         return this.http
           .get<{ [key: string]: BookData }>(
-            `https://reviews-f5f0b-default-rtdb.europe-west1.firebasedatabase.app/books.json?auth=${token}`
+            `https://reviews-f5f0b-default-rtdb.europe-west1.firebasedatabase.app/books.json?auth=${token}&&orderBy=%22userId%22&equalTo=%22` + this.authService.user+`%22`
           );
       }),
       map((bookData: any) => {
         const books: Book[] = [];
         for (const key in bookData) {
           if (bookData.hasOwnProperty(key)) {
-            books.push(new Book(key, bookData[key].title, bookData[key].author, bookData[key].rating, bookData[key].comment,bookData[key].imageUrl, bookData[key].userId)
+            books.push(new Book(key, bookData[key].title, bookData[key].author, bookData[key].rating, bookData[key].comment, bookData[key].imageUrl, bookData[key].userId)
             );
           }
         }
@@ -154,5 +162,8 @@ export class BooksService {
       })
     );
   }
+
+  
+
 
 }

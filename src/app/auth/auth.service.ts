@@ -48,12 +48,16 @@ export class AuthService {
     return this._user.asObservable().pipe(
       map((user) => {
         if (user) {
-          return user.token;
+          return user.id;
         } else {
           return null;
         }
       })
     );
+  }
+
+  get user() {
+    return this._user.getValue().id;
   }
 
   get token() {

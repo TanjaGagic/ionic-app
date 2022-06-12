@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BooksService } from '../books/books.service';
 
 @Component({
   selector: 'app-homepage',
@@ -7,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepagePage implements OnInit {
 
-  constructor() {
+  results: Observable<any>;
+  searchTerm = '';
+
+
+  constructor(private booksService: BooksService) {
     console.log('constructor');
   }
 
   ngOnInit() {
     console.log('ngOnInit');
   }
+
+
 
   ngViewWillEnter() {
     console.log('ionViewWillEnter');

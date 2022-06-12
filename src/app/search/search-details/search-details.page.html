@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/search"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Book Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngIf="information">
+    <ion-card-header>
+      <ion-card-title>
+        {{ information.volumeInfo.title }}
+      </ion-card-title>
+      <ion-card-subtitle>
+        {{ information.volumeInfo.authors }}
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content text-center>
+      <img [src]="information.volumeInfo.imageLinks.thumbnail" class="info-img">
+
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

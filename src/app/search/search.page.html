@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-button>
+    <ion-title class="ion-text-center">Search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="searchChanged($event)"></ion-searchbar>
+ 
+
+    <ion-list>
+      <ion-item button *ngFor="let item of (results | async)" [routerLink]="item.id">
+      <!--  <ion-avatar slot="start">
+          <img [src]="item.volumeInfo.imageLinks.thumbnail"  *ngIf="item.volumeInfo.imageLinks.thumbnail != 'N/A'">
+        </ion-avatar>-->
+
+        <ion-label text-wrap>
+          <h3>{{ item.volumeInfo.title }}</h3>
+          {{ item.volumeInfo.authors }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+</ion-content>

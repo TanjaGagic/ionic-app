@@ -23,6 +23,13 @@ const routes: Routes = [
   },
 
   {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then(m => m.SearchPageModule),
+    canLoad: [AuthGuard]
+  },
+
+
+  {
     path: 'log-in',
     loadChildren: () => import('./auth/log-in/log-in.module').then( m => m.LogInPageModule)
   },
@@ -30,7 +37,14 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./auth/register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: 'search/:id',
+    loadChildren: () => import('./search/search-details/search-details.module').then( m => m.SearchDetailsPageModule)
+  }
 
+  
+
+ 
  
   
   

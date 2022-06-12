@@ -3,7 +3,7 @@ import { AlertController, MenuController, ModalController } from '@ionic/angular
 import { Book } from './book.model';
 import { BooksModalComponent } from './books-modal/books-modal.component';
 import { BooksService } from './books.service';
-import {Subscription} from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-books',
@@ -18,6 +18,9 @@ export class BooksPage implements OnInit {
 
   books: Book[];
   private bookSub: Subscription;
+  results: Observable<any>;
+  searchTerm = '';
+
 
   constructor(private menuCtrl: MenuController, private booksService: BooksService, private modalCtrl: ModalController, private alertCtrl: AlertController) {
     console.log('constructor');
@@ -63,26 +66,36 @@ export class BooksPage implements OnInit {
       if (resultData.role === 'confirm') {
         console.log(resultData);
 
-        this.booksService.addBook(resultData.data.bookData.title, resultData.data.bookData.author, resultData.data.bookData.rating, resultData.data.bookData.comment, resultData.data.bookData.imageUrl).subscribe((books) => {});
+        this.booksService.addBook(resultData.data.bookData.title, resultData.data.bookData.author, resultData.data.bookData.rating, resultData.data.bookData.comment, resultData.data.bookData.imageUrl).subscribe((books) => { });
+        this.ngOnInit();
       }
     });
   }
 
   ngOnInit() {
     console.log('ngOnInit');
-    this.bookSub = this.booksService.books.subscribe((books) => {
+    this.bookSub = this.booksService.getBooks().subscribe((books) => {
       this.books = books;
+   
     });
   }
 
+
   ngViewWillEnter() {
-    this.booksService.getBooks().subscribe((books) => {
-     
+    console.log('ngViewWillEnter');
+
+  this.booksService.getBooks().subscribe((books) => {
+      this.books = books;
     });
   }
 
   ngViewDidEnter() {
     console.log('ionViewDidEnter');
+
+ this.booksService.getBooks().subscribe((books) => {
+      this.books = books;
+
+    });
   }
 
   ngViewWillLeave() {
