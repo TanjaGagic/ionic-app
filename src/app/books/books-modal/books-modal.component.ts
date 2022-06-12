@@ -8,6 +8,11 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./books-modal.component.scss'],
 })
 export class BooksModalComponent implements OnInit {
+
+
+  constructor(private modalCtrl: ModalController) { }
+
+  ngOnInit() { }
   @ViewChild('f', { static: true }) form: NgForm;
   @Input() title: string;
   @Input() author: string;
@@ -15,15 +20,12 @@ export class BooksModalComponent implements OnInit {
   @Input() comment: string;
   @Input() imageUrl: string;
 
-  constructor(private modalCtrl: ModalController) { }
-
-  ngOnInit() { }
-
   onCancel() {
     this.modalCtrl.dismiss();
   }
 
   onAddBook() {
+    console.log(this.form);
     if (!this.form.valid) {
       return;
     }

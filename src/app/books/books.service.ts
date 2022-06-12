@@ -4,7 +4,6 @@ import { Book } from './book.model';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
-import { User } from '../auth/user.model';
 
 
 interface BookData {

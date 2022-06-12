@@ -5,15 +5,17 @@
     </ion-button>
     <ion-title>Books</ion-title>
     <ion-buttons slot="end">
-      <ion-fab-button size="small" (click)="openModal()">
-        <ion-icon name="add"></ion-icon>
+      <ion-fab-button size="small" routerLink="../search">
+        <ion-icon name="search"></ion-icon>
       </ion-fab-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<ion-content>
 
   <ion-list>
     <app-book-element *ngFor="let book of books" [book]="book" [routerLink]="book.id"></app-book-element>
   </ion-list>
 
+</ion-content>

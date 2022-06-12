@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, MenuController, ModalController } from '@ionic/angular';
+import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
 import { Book } from './book.model';
 import { BooksModalComponent } from './books-modal/books-modal.component';
 import { BooksService } from './books.service';
 import { Subscription, Observable } from 'rxjs';
+import { SearchPage } from '../search/search.page';
 
 @Component({
   selector: 'app-books',
@@ -20,15 +21,19 @@ export class BooksPage implements OnInit {
   private bookSub: Subscription;
   results: Observable<any>;
   searchTerm = '';
+  searchPage: SearchPage;
 
-
-  constructor(private menuCtrl: MenuController, private booksService: BooksService, private modalCtrl: ModalController, private alertCtrl: AlertController) {
+  constructor(private menuCtrl: MenuController, private booksService: BooksService, private modalCtrl: ModalController, private alertCtrl: AlertController, public navCtrl: NavController) {
     console.log('constructor');
     //this.books = this.booksService.books;
   }
 
   openMenu() {
     this.menuCtrl.open();
+  }
+
+  nextpage() {
+    this.navCtrl.navigateRoot('../search');
   }
 
   showConfirmAlert(event) {
