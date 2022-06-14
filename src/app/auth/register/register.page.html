@@ -34,8 +34,8 @@
       <ion-row
         *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched"
       >
-        <ion-col size-sm="6" offset-sm="3">
-          <p>Please enter a correct email address.</p>
+        <ion-col size-sm="6" offset-sm="3" color="tetriary">
+          <p color="tertiary">Please enter a correct email address.</p>
         </ion-col>
       </ion-row>
 
@@ -52,8 +52,8 @@
       <ion-row
         *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched"
       >
-        <ion-col size-sm="6" offset-sm="3">
-          <p>Password must contain at least 8 characters.</p>
+        <ion-col size-sm="6" offset-sm="3" color="tetriary">
+          <p color="tertiary">Password must contain at least 8 characters.</p>
         </ion-col>
       </ion-row>
 
