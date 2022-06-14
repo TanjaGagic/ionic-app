@@ -3,12 +3,11 @@ import { NgForm } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-books-modal',
-  templateUrl: './books-modal.component.html',
-  styleUrls: ['./books-modal.component.scss'],
+  selector: 'app-edit-modal',
+  templateUrl: './edit-modal.component.html',
+  styleUrls: ['./edit-modal.component.scss'],
 })
-export class BooksModalComponent implements OnInit {
-
+export class EditModalComponent implements OnInit {
 
   constructor(private modalCtrl: ModalController) { }
 
@@ -24,7 +23,7 @@ export class BooksModalComponent implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  onAddBook() {
+  onEditBook() {
     console.log(this.form);
     if (!this.form.valid) {
       return;
@@ -40,7 +39,7 @@ export class BooksModalComponent implements OnInit {
         imageUrl: this.form.value.imageUrl,
       }
     }, 'confirm');
-      }     
   }
+ 
 
-
+}

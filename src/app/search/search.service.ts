@@ -53,6 +53,7 @@ export class SearchService {
           title, author, rating, comment,
           imageUrl, fetchedUserId
         );
+        console.log(title);
         return this.http.post<{ name: string }>(
           `https://reviews-f5f0b-default-rtdb.europe-west1.firebasedatabase.app/books.json?auth=${token}`, newBook);
       }),

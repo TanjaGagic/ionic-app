@@ -5,6 +5,9 @@
     "\\src\\app",
     "\\src\\app\\books",
     "\\src\\app\\books\\book-details",
+    "\\src\\app\\books\\book-element",
+    "\\src\\app\\books\\books-modal",
+    "\\src\\app\\books\\edit-modal",
     "\\src\\app\\search",
     "\\src\\app\\search\\search-details"
   ],

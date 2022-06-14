@@ -56,7 +56,7 @@ export class SearchDetailsPage implements OnInit {
     }).then((resultData) => {
       if (resultData.role === 'confirm') {
         console.log(resultData);
-        this.booksService.addBook(resultData.data.bookData.title, resultData.data.bookData.author, resultData.data.bookData.rating, resultData.data.bookData.comment, resultData.data.bookData.imageUrl).subscribe((books) => { });
+        this.booksService.addBook(this.information.volumeInfo.title, this.information.volumeInfo.authors, resultData.data.bookData.rating, resultData.data.bookData.comment, this.information.volumeInfo.imageLinks.thumbnail).subscribe((books) => { });
         this.ngOnInit();
       }
     });

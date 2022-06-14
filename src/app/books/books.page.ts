@@ -5,6 +5,7 @@ import { BooksModalComponent } from './books-modal/books-modal.component';
 import { BooksService } from './books.service';
 import { Subscription, Observable } from 'rxjs';
 import { SearchPage } from '../search/search.page';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-books',
@@ -62,7 +63,7 @@ export class BooksPage implements OnInit {
 
   openModal() {
     this.modalCtrl.create({
-      component: BooksModalComponent,
+      component: EditModalComponent,
       componentProps: {title: 'Add a book'}
     }).then((modal: HTMLIonModalElement) => {
       modal.present();
@@ -76,6 +77,8 @@ export class BooksPage implements OnInit {
       }
     });
   }
+
+
 
   ngOnInit() {
     console.log('ngOnInit');

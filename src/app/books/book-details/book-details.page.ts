@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController, ModalController, NavController } from '@ionic/angular';
 import { Book } from '../book.model';
 import { BooksService } from '../books.service';
-import {BooksModalComponent} from '../books-modal/books-modal.component';
+import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
   selector: 'app-book-details',
@@ -13,6 +13,7 @@ import {BooksModalComponent} from '../books-modal/books-modal.component';
 export class BookDetailsPage implements OnInit {
   book: Book;
   isLoading: boolean = false;
+  information = null;
 
 
   constructor(private route: ActivatedRoute, private booksService: BooksService, private navCtrl: NavController,
@@ -39,6 +40,7 @@ export class BookDetailsPage implements OnInit {
 
 
   onDeleteBook() {
+
     this.alertCtrl.create({
       header: 'Deleting book',
       message: 'Are you sure you want to permanently delete this book?',
@@ -67,42 +69,46 @@ export class BookDetailsPage implements OnInit {
   }
 
 
-    onEditBook() {
-      this.modalCtrl
-        .create({
-          component: BooksModalComponent,
-          componentProps: {title: 'Edit book', name: this.book.title, author: this.book.author, rating: this.book.rating, 
-          comment: this.book.comment},
-        })
-        .then((modal) => {
-          modal.present();
-          return modal.onDidDismiss();
-        })
-        .then((resultData) => {
-          if (resultData.role === 'confirm') {
-            this.loadingCtrl
-              .create({message: 'Editing...'})
-              .then((loadingEl) => {
-                loadingEl.present();
-                this.booksService
-                  .editBook(
-                    this.book.id,
-                    resultData.data.bookData.title,
-                    resultData.data.bookData.author,
-                    resultData.data.bookData.rating,
-                    resultData.data.bookData.comment,
-                    this.book.imageUrl,
-                    this.book.userId
-                  )
-                  .subscribe((books) => {
-                    this.book.title = resultData.data.bookData.title;
-                    this.book.author = resultData.data.bookData.author;
-                    this.book.rating = resultData.data.bookData.rating;
-                    this.book.comment = resultData.data.bookData.comment;
-                    loadingEl.dismiss();
-                  });
-              });
-          }
+  onEditBook() {
+  
+    this.modalCtrl
+      .create({
+        component: EditModalComponent,
+        componentProps: {
+          title: 'Edit book', name: this.book.title, author: this.book.author, rating: this.book.rating,
+          comment: this.book.comment, imageUrl: this.book.imageUrl, information: this.book
+        },
+      })
+      .then((modal) => {
+        modal.present();
+        return modal.onDidDismiss();
+      })
+      .then((resultData) => {
+        if (resultData.role === 'confirm') {
+          this.loadingCtrl
+            .create({ message: 'Editing...' })
+            .then((loadingEl) => {
+              loadingEl.present();
+              this.booksService
+                .editBook(
+                  this.book.id,
+                  this.book.title,
+                  this.book.author,
+                  resultData.data.bookData.rating,
+                  resultData.data.bookData.comment,
+                  this.book.imageUrl,
+                  this.book.userId
+                )
+                .subscribe((books) => {
+                  this.book.title = this.book.title;
+                  this.book.author = this.book.author;
+                  this.book.rating = resultData.data.bookData.rating;
+                  this.book.comment = resultData.data.bookData.comment;
+                  this.book.imageUrl = this.book.imageUrl;
+                  loadingEl.dismiss();
+                });
+            });
+        }
         });
     }
 
