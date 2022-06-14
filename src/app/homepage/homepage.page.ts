@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BooksService } from '../books/books.service';
+import { Observable, Subscription } from 'rxjs';
+import { Book } from '../books/book.model';
+import { HomepageService } from './homepage.service';
 
 @Component({
   selector: 'app-homepage',
@@ -9,26 +10,43 @@ import { BooksService } from '../books/books.service';
 })
 export class HomepagePage implements OnInit {
 
+  books: Book[];
+  private bookSub: Subscription;
   results: Observable<any>;
   searchTerm = '';
 
 
-  constructor(private booksService: BooksService) {
+  constructor(private homepageService: HomepageService) {
     console.log('constructor');
   }
 
   ngOnInit() {
     console.log('ngOnInit');
+    this.bookSub = this.homepageService.getBooks().subscribe((books) => {
+      this.books = books;
+   
+    });
   }
 
 
 
   ngViewWillEnter() {
-    console.log('ionViewWillEnter');
+   
+      console.log('ngViewWillEnter');
+  
+    this.homepageService.getBooks().subscribe((books) => {
+        this.books = books;
+      });
+    
   }
 
   ngViewDidEnter() {
     console.log('ionViewDidEnter');
+
+ this.homepageService.getBooks().subscribe((books) => {
+      this.books = books;
+
+    });
   }
 
   ngViewWillLeave() {
@@ -40,6 +58,9 @@ export class HomepagePage implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log('ngOnDestroy');
+    if (this.bookSub) {
+      this.bookSub.unsubscribe();
+    }
   }
-}
+  }
+

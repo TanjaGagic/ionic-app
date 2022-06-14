@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { BooksComponent } from './books.component';
+import { BookHpElementComponent } from './book-hp-element.component';
 
-describe('BooksComponent', () => {
-  let component: BooksComponent;
-  let fixture: ComponentFixture<BooksComponent>;
+describe('BookElementComponent', () => {
+  let component: BookHpElementComponent;
+  let fixture: ComponentFixture<BookHpElementComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ BooksComponent ],
+      declarations: [ BookHpElementComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(BooksComponent);
+    fixture = TestBed.createComponent(BookHpElementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
