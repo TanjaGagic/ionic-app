@@ -10,8 +10,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Homepage', url: '/homepage', icon: 'home' },
     { title: 'Books', url: '/books', icon: 'book' },
-    { title: 'Search', url: '/search', icon: 'search' },
-    { title: 'About us', url: '/folder/About Us', icon: 'people' },
+    { title: 'Search', url: '/search', icon: 'search' }
   ];
   constructor(private authService: AuthService, private router: Router) {
   }
